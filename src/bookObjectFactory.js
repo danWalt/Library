@@ -1,4 +1,5 @@
-function book(title, author, numberOfPages, readOrNot) {
+const book = {
+    init: function(title, author, numberOfPages, readOrNot) {
     this.title = title
     this.author = author
     this.numberOfPages = numberOfPages
@@ -7,6 +8,7 @@ function book(title, author, numberOfPages, readOrNot) {
         return (readOrNot ? this.title + ' by ' + this.author + ', ' + this.numberOfPages + ' pages, read' :
          this.title + ' by ' + this.author + ', ' + this.numberOfPages + ' pages, not read yet')
     }
+    return this
 }
-
+}
  export default book;
