@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Library</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="library">Library</h1>
+        <button class="btn" id='add-book'>add book</button>
+        <div class="bookForm" id="bookForm">
+            <form class="formContainer">
+                <strong>Book Name</strong>
+            <input type="text" id="book-name" placeholder="book name" name="book-name" required>
+                <strong>Author</strong>
+            <input type="text" id="author-name" placeholder="author name" name="author-name" required>
+                <strong>How many pages are there in the book</strong>
+            <input type="number" id="number-of-pages" placeholder="number of pages" name="number-of-pages" required>
+            <label for="read">have you read the book?</label>
+                <select name="read" id="read">
+                <option value="yes">yes</option>
+                <option value="no">no</option>
+            </select>
+            <button type="submit" class="btn" id="save">save</button>
+            </form>
+        </div>
+    </div>
+
+    </div>
+    <script type="module" src="./src/app.js"></script> 
+</body>
+</html>
