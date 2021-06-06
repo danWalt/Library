@@ -1,16 +1,8 @@
 import book from '../src/bookObjectFactory';
 
-
-describe('sanity', () => {
-    it('book object is instanceof book', () => {
-        const book1 = new book('title', 'author', 'number of pages', 'have I read')
-        expect(book1 instanceof book).toBeTruthy()
-    })    
-}) 
-
 describe('check book metrics', () =>{
-    const notYetReadBook = new book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-    const readBook = new book('Holes', 'Louis Sachar', 272 , true)
+    const notYetReadBook = Object.create(book).init('The Hobbit', 'J.R.R. Tolkien', 295, false)
+    const readBook = Object.create(book).init('Holes', 'Louis Sachar', 272 , true)
 
     it('book name test', () => {
         expect(notYetReadBook.title).toBe('The Hobbit')
