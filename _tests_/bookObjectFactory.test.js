@@ -22,8 +22,6 @@ describe('check book metrics', () =>{
     it('info test, book was read', () => {
         expect(readBook.info()).toBe('Holes by Louis Sachar, 272 pages, read')
     })
-    
-    
 })
     
 
