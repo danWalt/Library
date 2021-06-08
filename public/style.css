@@ -6,3 +6,18 @@
     display: block;
     border: 2px solid black;
 }
+
+.books-container{
+    display: flex;
+}
+
+
+.backgroundRead {
+    background-color: rgb(30, 197, 71);
+}
+
+
+
+.backgroundNotRead {
+    background-color: rgb(230, 21, 73);
+}
