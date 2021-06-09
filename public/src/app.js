@@ -1,13 +1,42 @@
 import book from './bookObjectFactory.js';
+document.addEventListener('DOMContentLoaded', event => {
+    const app = firebase.app()
+    const db = firebase.firestore()
+    const books = db.collection('books')
 
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-//import firebase from "firebase/app";
+    const book0 = books.doc('0')
+
+    book0.get()
+          .then(doc => {
+              const data = doc.data();
+              console.log(data.title)
+          })
+
+    book0.onSnapshot(doc => {
+        const data = doc.data();
+        console.log(data.title)
+    })
+});
+
 
 const addBookButton = document.getElementById('add-book')
 const saveBookButton = document.getElementById('save')
 const cancelBookButton = document.getElementById('cancel')
 const booksContainer = document.getElementById('books-container')
+const googleLogin = document.getElementById('googleLogin') //might remove later
 
+
+googleLogin.addEventListener('click', () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+
+    .then(result => {
+        const user = result.user;
+        alert(`Hello ${user.displayName}`);
+        console.log(user)
+    })
+    .catch(console.log)
+})
 
 // TODO: move to firebase
 // TODO: delete test books
