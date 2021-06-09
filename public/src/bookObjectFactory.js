@@ -12,11 +12,6 @@ const book = {
          this.title + ' by ' + this.author + ', ' + this.numberOfPages + ' pages, not read yet')
     }
 
-    // function toggleBook(){
-    //     this.readOrNot ? this.readOrNot = false : this.readOrNot = true
-    // }
-
-
     function generateID() {
         return id++
     }
