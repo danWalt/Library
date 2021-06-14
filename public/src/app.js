@@ -48,7 +48,6 @@ function addBooksFromLibrary () {
     });
 };
 
-// TODO: this is currently hiding, need to figure out why
 // opens a new book form when the 'add book' button is clicked and hides the add book button
 addBookButton.addEventListener('click', () => {
     document.getElementById("bookForm").style.display = 'block';
