@@ -52,8 +52,7 @@ googleLogin.addEventListener('click', () => {
 function addBooksFromLibrary () {
     db.collection('books').get().then(snapshot => {
         snapshot.docs.forEach(doc => {
-            //console.log(doc.data())
-            createNewBookObject(doc.data().title, doc.data().author, doc.data().number_of_pages_in_book, doc.data().read)
+            createNewBookObject(doc.data().name, doc.data().author, doc.data().number_of_pages_in_book, doc.data().read)
         })
     });
 };
@@ -65,7 +64,7 @@ function addBooksFromLibrary () {
     // myLibrary.push(book)
 // }
 
-
+// TODO: this is currently hiding, need to figure out why
 // opens a new book form when the 'add book' button is clicked and hides the add book button
 addBookButton.addEventListener('click', () => {
     document.getElementById("bookForm").style.display = 'block';
@@ -93,7 +92,6 @@ cancelBookButton.addEventListener('click', () => {
 
 // create a new book div when a new book is added to library
 function createNewBookDiv(newBook){
-    //console.log('newbook ' + newBook.info())
     let newBookDiv = document.createElement('div')
     newBookDiv.className = 'book'
     newBookDiv.innerText = 'Book Name: ' + newBook.title + "\n Author Name: " + newBook.author + "\n Number of Pages: " + newBook.numberOfPages
@@ -156,9 +154,12 @@ function createRemoveBookOption(bookDiv){
 
 // remove a book from library array
 function removeBookFromLibrary(bookId){
-    const book = returnBookIndexInLibrary(bookId)
-            myLibrary.splice(book, 1)
-}
+    db.collection("books").doc(bookId).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+};
 
 // // find book in library based on ID
 // function returnBookIndexInLibrary(bookId) {
@@ -182,7 +183,12 @@ function createNewBookObject(bookName, bookAuthor, numberOfPages, isRead){
     let newBook = ''
     if(bookName && bookAuthor && numberOfPages) {
         newBook = Object.create(book).init(bookName, bookAuthor, numberOfPages, isRead)
-        // addBookToLibrary(newBook)
+        db.collection("books").doc(String(newBook.id)).set({
+            name: bookName,
+            author: bookAuthor,
+            number_of_pages_in_book: numberOfPages,
+            read: isRead
+        })
         let newBookDiv = createNewBookDiv(newBook)
         createRemoveBookOption(newBookDiv)
         clearForm() // clears form after a new book is saved
