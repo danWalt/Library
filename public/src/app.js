@@ -20,7 +20,6 @@ const firebaseConfig = {
  }
 
 const db = firebase.firestore()
-
 const addBookButton = document.getElementById('add-book')
 const saveBookButton = document.getElementById('save')
 const cancelBookButton = document.getElementById('cancel')
@@ -40,14 +39,6 @@ googleLogin.addEventListener('click', () => {
     .catch(console.log)
 })
 
-// // TODO: move to firebase
-// // TODO: delete test books
-// // library array this will be moved to firebase later
-// let myLibrary = [{title: "aaa", author: "rrr", numberOfPages: "1", readOrNot: "yes"},
-// {title: "aaa", author: "rrr", numberOfPages: "1", readOrNot: "no"}];
-
-
-
 // When loaded from db, add stored books to screen
 function addBooksFromLibrary () {
     db.collection('books').get().then(snapshot => {
@@ -57,13 +48,6 @@ function addBooksFromLibrary () {
     });
 };
 
-
-// TODO: move this to firebase 
-//adding a book to the library array, will be moved to firebase
-// function addBookToLibrary(book){
-    // myLibrary.push(book)
-// }
-
 // TODO: this is currently hiding, need to figure out why
 // opens a new book form when the 'add book' button is clicked and hides the add book button
 addBookButton.addEventListener('click', () => {
@@ -71,7 +55,6 @@ addBookButton.addEventListener('click', () => {
     addBookButton.className = 'hide'
 })
 
-// TODO: check if can use book.info
 // saves a new book when save button is clicked both to library and creates a new book div
 saveBookButton.addEventListener('click', () => {
     let bookName = document.getElementById('book-name').value
@@ -88,7 +71,6 @@ cancelBookButton.addEventListener('click', () => {
     document.getElementById("bookForm").style.display = "none"; // hide form after a book is saved
     addBookButton.className = 'btn'
 })
-
 
 // create a new book div when a new book is added to library
 function createNewBookDiv(newBook){
@@ -148,7 +130,6 @@ function createRemoveBookOption(bookDiv){
         removeBookFromLibrary(bookDiv.id)
         return false;
     }
-
 }
 
 
@@ -160,23 +141,6 @@ function removeBookFromLibrary(bookId){
         console.error("Error removing document: ", error);
     });
 };
-
-// // find book in library based on ID
-// function returnBookIndexInLibrary(bookId) {
-//     console.log(db.collection('books').doc(bookId).get().then((doc) => {
-//         if(doc.exists) {
-//             return doc.data();
-//         }
-//         else {
-//             console.log("No such document!");
-//         }
-//     }))
-//     // return db.collection('books').get(bookId).then(() => {
-//             // console.log(doc.data())
-//         // })
-// };
-
-
 
 // create a new book object using the book factory
 function createNewBookObject(bookName, bookAuthor, numberOfPages, isRead){
@@ -196,7 +160,6 @@ function createNewBookObject(bookName, bookAuthor, numberOfPages, isRead){
         addBookButton.className = 'btn'
     }
     return false
-
 }
 
 //clears new book form after a new book is created
@@ -210,4 +173,3 @@ function clearForm() {
 addBooksFromLibrary()
 
 })
-
