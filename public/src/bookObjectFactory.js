@@ -1,7 +1,9 @@
 let id = 0;
 
-const book = {
-    init: function(title, author, numberOfPages, readOrNot) {
+class Book  {
+
+
+    constructor(title, author, numberOfPages, readOrNot) {
     this.title = title
     this.author = author
     this.numberOfPages = numberOfPages
@@ -19,4 +21,4 @@ const book = {
     return this
 }
 }
- export default book;
+ export default Book;

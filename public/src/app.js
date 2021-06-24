@@ -1,4 +1,4 @@
-import book from './bookObjectFactory.js';
+import Book from './bookObjectFactory.js';
 //import db from './firestore.js';
 
 
@@ -60,6 +60,7 @@ saveBookButton.addEventListener('click', () => {
     let bookAuthor = document.getElementById('author-name').value
     let numberOfPages = document.getElementById('number-of-pages').value
     let isRead = document.getElementById('read').value
+
     // create the new book object
     createNewBookObject(bookName, bookAuthor, numberOfPages, isRead)
 });
@@ -77,7 +78,8 @@ function createNewBookDiv(newBook){
     newBookDiv.className = 'book'
     newBookDiv.innerText = 'Book Name: ' + newBook.title + "\n Author Name: " + newBook.author + "\n Number of Pages: " + newBook.numberOfPages
     + "\n" + 'Have I read the book?: '
-    addReadToggle(newBookDiv, newBook.readOrNot)  
+    let isTrueSet = (newBook.readOrNot === 'true')
+    addReadToggle(newBookDiv, isTrueSet)  
     booksContainer.appendChild(newBookDiv)
     newBookDiv.id = newBook.id
     return newBookDiv
@@ -145,7 +147,7 @@ function removeBookFromLibrary(bookId){
 function createNewBookObject(bookName, bookAuthor, numberOfPages, isRead){
     let newBook = ''
     if(bookName && bookAuthor && numberOfPages) {
-        newBook = Object.create(book).init(bookName, bookAuthor, numberOfPages, isRead)
+        newBook = new Book(bookName, bookAuthor, numberOfPages, isRead)
         db.collection("books").doc(String(newBook.id)).set({
             name: bookName,
             author: bookAuthor,
